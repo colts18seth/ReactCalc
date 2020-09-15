@@ -1,10 +1,11 @@
 import React from 'react';
-import Calc_Buttons from './Calc_Buttons';
+import CalcButtons from './CalcButtons';
+import './Calculator.css';
 
 function Calculator() {
     return (
         <div className="Calculator">
-            <Calc_Buttons />
+            <CalcButtons />
         </div>
     );
 }
