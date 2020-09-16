@@ -1,28 +1,36 @@
 import React, { useState } from 'react';
-import CalcInput from './CalcInput';
+import CalcDisplay from './CalcDisplay';
 import './CalcButtons.css';
 
 function CalcButtons() {
-    const [state, setState] = useState(null);
+    const [state, setState] = useState([]);
+    const [firstNum, setFirstNum] = useState(null);
+    const [math, setMath] = useState(null);
 
-    const handleNum = () => {
+    const handleNum = (e) => {
+        if (math) {
+            setFirstNum(state);
+            setState([])
+        }
+        state.length !== 0
+            ? setState([state + e.target.innerHTML])
+            : setState([e.target.innerHTML])
+    }
+
+    const handleMath = (e) => {
+        setMath(e.target.innerHTML);
+    }
+
+    const handleEqual = (e) => {
 
     }
 
-    const handleMath = () => {
-
-    }
-
-    const handleEqual = () => {
-
-    }
-
-    const handleNeg = () => {
+    const handleNeg = (e) => {
 
     }
 
     const handleClear = () => {
-
+        setState([])
     }
 
     return (
@@ -30,34 +38,34 @@ function CalcButtons() {
 
             <tbody>
                 <tr>
-                    <td className='CalcInput' colSpan="4"><CalcInput /></td>
+                    <td className='CalcDisplay' colSpan="4"><CalcDisplay state={state} firstNum={firstNum} math={math} /></td>
                 </tr>
                 <tr>
-                    <td className='topRow'>AC/C</td>
+                    <td className='topRow' onClick={handleClear}>AC</td>
                     <td className='topRow'>+/-</td>
                     <td className='topRow'>%</td>
-                    <td className="rightCol">÷</td>
+                    <td className="rightCol" onClick={handleMath}>÷</td>
                 </tr>
                 <tr>
-                    <td>7</td>
-                    <td>8</td>
-                    <td>9</td>
-                    <td className="rightCol">x</td>
+                    <td onClick={handleNum}>7</td>
+                    <td onClick={handleNum}>8</td>
+                    <td onClick={handleNum}>9</td>
+                    <td className="rightCol" onClick={handleMath}>x</td>
                 </tr>
                 <tr>
-                    <td>4</td>
-                    <td>5</td>
-                    <td>6</td>
-                    <td className="rightCol">-</td>
+                    <td onClick={handleNum}>4</td>
+                    <td onClick={handleNum}>5</td>
+                    <td onClick={handleNum}>6</td>
+                    <td className="rightCol" onClick={handleMath}>-</td>
                 </tr>
                 <tr>
-                    <td>1</td>
-                    <td>2</td>
-                    <td>3</td>
-                    <td className="rightCol">+</td>
+                    <td onClick={handleNum}>1</td>
+                    <td onClick={handleNum}>2</td>
+                    <td onClick={handleNum}>3</td>
+                    <td className="rightCol" onClick={handleMath}>+</td>
                 </tr>
                 <tr>
-                    <td colSpan='2'>0</td>
+                    <td colSpan='2' onClick={handleNum}>0</td>
                     <td>.</td>
                     <td className="rightCol">=</td>
                 </tr>
